@@ -1,0 +1,32 @@
+[
+    {
+      "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/b02aacc0-b073-424e-8298-42b22829ee0a",
+      "policyDefinitionReferenceId": "Activity log should be retained for at least one year",
+      "parameters": {},
+      "groupNames": ["Monitoring"]
+    },
+    {
+      "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/c02729e5-e5e7-4458-97fa-2b5ad0661f28",
+      "policyDefinitionReferenceId": "Windows virtual machines should have Azure Monitor Agent installed",
+      "parameters": {},
+      "groupNames": ["Monitoring"]
+    },
+    {
+      "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/3672e6f7-a74d-4763-b138-fcf332042f8f",
+      "policyDefinitionReferenceId": "Windows virtual machine scale sets should have Azure Monitor Agent installed",
+      "parameters": {},
+      "groupNames": ["Monitoring"]
+    },
+    {
+      "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/32ade945-311e-4249-b8a4-a549924234d7",
+      "policyDefinitionReferenceId": "Linux virtual machine scale sets should have Azure Monitor Agent installed",
+      "parameters": {},
+      "groupNames": ["Monitoring"]
+    },
+    {
+      "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/1afdc4b6-581a-45fb-b630-f1e6051e3e7a",
+      "policyDefinitionReferenceId": "Linux virtual machines should have Azure Monitor Agent installed",
+      "parameters": {},
+      "groupNames": ["Monitoring"]
+    }
+]

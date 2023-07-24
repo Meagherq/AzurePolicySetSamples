@@ -1,0 +1,85 @@
+{
+    "mode": "Indexed",
+    "policyRule": {
+      "if": {
+        "allOf": [
+          {
+            "field": "type",
+            "equals": "Microsoft.Resources/subscriptions"
+          },
+          {
+            "anyOf": [
+              {
+                "value": "[first(parameters('resourceLocationList'))]",
+                "equals": "*"
+              },
+              {
+                "field": "location",
+                "in": "[parameters('resourceLocationList')]"
+              }
+            ]
+          }
+        ]
+      },
+      "then": {
+        "effect": "[parameters('effect')]",
+        "details": {
+          "type": "Microsoft.Insights/diagnosticSettings",
+          "existenceCondition": {
+            "allOf": [
+              {
+                "field": "Microsoft.Insights/diagnosticSettings/logs.enabled",
+                "equals": "[parameters('logsEnabled')]"
+              },
+              {
+                "field": "Microsoft.Insights/diagnosticSettings/workspaceId",
+                "equals": "[parameters('logAnalytics')]"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "parameters": {
+      "effect": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect",
+          "description": "Enable or disable the execution of the policy"
+        },
+        "allowedValues": [
+          "AuditIfNotExists",
+          "Disabled"
+        ],
+        "defaultValue": "AuditIfNotExists"
+      },
+      "logsEnabled": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Logs Enabled",
+          "description": "Boolean whether logs are enabled"
+        },
+        "defaultValue": true
+      },
+      "resourceLocationList": {
+        "type": "Array",
+        "metadata": {
+          "displayName": "Resource Location List",
+          "description": "Resource Location List to send logs to nearby Log Analytics. A single entry \"*\" selects all locations (default)."
+        },
+        "defaultValue": [
+          "*"
+        ]
+      },
+      "logAnalytics": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Log Analytics Workspace",
+          "description": "Log Analytics Workspace",
+          "strongType": "omsWorkspace",
+          "assignPermissions": true
+        },
+        "defaultValue": "ebd7199b-33be-4511-b7e0-d6d015e7ae20"
+      }
+    }
+  }
