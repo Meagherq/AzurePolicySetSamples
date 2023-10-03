@@ -35,10 +35,6 @@
                       {
                         "field": "Microsoft.Insights/diagnosticSettings/logs[*].enabled",
                         "equals": "[equals(parameters('categoryGroup'), 'audit')]"
-                      },
-                      {
-                        "field": "microsoft.insights/diagnosticSettings/logs[*].categoryGroup",
-                        "equals": "audit"
                       }
                     ]
                   }
@@ -53,10 +49,6 @@
                       {
                         "field": "Microsoft.Insights/diagnosticSettings/logs[*].enabled",
                         "equals": "[equals(parameters('categoryGroup'), 'allLogs')]"
-                      },
-                      {
-                        "field": "microsoft.insights/diagnosticSettings/logs[*].categoryGroup",
-                        "equals": "allLogs"
                       }
                     ]
                   }

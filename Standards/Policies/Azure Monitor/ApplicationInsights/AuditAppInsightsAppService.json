@@ -1,0 +1,73 @@
+{
+  "mode": "Indexed",
+  "policyRule": {
+    "if": {
+      "allOf": [
+        {
+          "field": "type",
+          "equals": "microsoft.Web/sites"
+        },
+        {
+          "anyOf": [
+            {
+              "value": "[first(parameters('resourceLocationList'))]",
+              "equals": "*"
+            },
+            {
+              "field": "location",
+              "in": "[parameters('resourceLocationList')]"
+            }
+          ]
+        }
+      ]
+    },
+    "then": {
+      "effect": "[parameters('effect')]",
+      "details": {
+        "type": "Microsoft.Web/sites/config/appsettings",
+        "existenceCondition": {
+          "allOf": [
+            {
+              "count": {
+                "field": "Microsoft.Web/sites/config/appsettings[*]",
+                "where": {
+                  "allOf": [
+                    {
+                      "field": "Microsoft.Web/sites/config/appSettings[*].name",
+                      "equals": "APPINSIGHTS_INSTRUMENTATIONKEY"
+                    }
+                  ]
+                }
+              },
+              "equals": 1
+            }
+          ]
+        }
+      }
+    }
+  },
+  "parameters": {
+    "effect": {
+      "type": "String",
+      "metadata": {
+        "displayName": "Effect",
+        "description": "Enable or disable the execution of the policy"
+      },
+      "allowedValues": [
+        "AuditIfNotExists",
+        "Disabled"
+      ],
+      "defaultValue": "AuditIfNotExists"
+    },
+    "resourceLocationList": {
+      "type": "Array",
+      "metadata": {
+        "displayName": "Resource Location List",
+        "description": "Resource Location List to send logs to nearby Log Analytics. A single entry \"*\" selects all locations (default)."
+      },
+      "defaultValue": [
+        "*"
+      ]
+    }
+  }
+}
